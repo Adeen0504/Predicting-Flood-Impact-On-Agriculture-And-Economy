@@ -1232,4 +1232,4 @@ if __name__ == '__main__':
     print(f"[DATA] Modules: 7 (Hazard, Suitability, Damage, Economic, Market, Humanitarian, Recommendations)")
     print(f"[INFO] Server: http://127.0.0.1:5000")
     print("="*60 + "\n")
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
