@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Flood Impact - Telangana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #8B1E3F;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+        .header {
+            background: #8B1E3F;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            margin: -20px -20px 20px -20px;
+        }
+        .nav {
+            background: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: #8B1E3F;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        select:focus, input:focus {
+            border-color: #8B1E3F;
+            outline: none;
+        }
+        .info-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-left: 4px solid #8B1E3F;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+        .threshold-hint {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .threshold-hint span {
+            color: #8B1E3F;
+            font-weight: bold;
+        }
+        .warning {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .success {
+            color: #28a745;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #8B1E3F;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #4A2C3D;
+        }
+        .feature-badge {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin: 2px;
+            color: #495057;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>🌾 TELANGANA FLOOD IMPACT 🌊</h2>
+            <p>Complete Prediction System - 7 Modules | 50+ Features</p>
+        </div>
+        
+        <div class="nav">
+            <a href="/about">🏠 Home</a>
+            <a href="/predict">🔮 Predict</a>
+            <a href="/data">📊 Data</a>
+            <a href="/analytics">📈 Analytics</a>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 15px;">
+            <span class="feature-badge">📍 33 Districts</span>
+            <span class="feature-badge">🌾 7 Crops</span>
+            <span class="feature-badge">📊 50+ Features</span>
+            <span class="feature-badge">🎯 7 Modules</span>
+        </div>
+        
+        <form action="/predict" method="POST" id="predictionForm">
+            <!-- District Selection with dynamic info -->
+            <div class="form-group">
+                <label>📍 District *</label>
+                <select name="district" id="district" required onchange="showDistrictInfo()">
+                    <option value="">-- Select District (33 available) --</option>
+                    <option value="Adilabad">Adilabad</option>
+                    <option value="Bhadradri Kothagudem">Bhadradri Kothagudem</option>
+                    <option value="Hanamkonda">Hanamkonda</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Jagtial">Jagtial</option>
+                    <option value="Jangaon">Jangaon</option>
+                    <option value="Jayashankar Bhupalpally">Jayashankar Bhupalpally</option>
+                    <option value="Jogulamba Gadwal">Jogulamba Gadwal</option>
+                    <option value="Kamareddy">Kamareddy</option>
+                    <option value="Karimnagar">Karimnagar</option>
+                    <option value="Khammam">Khammam</option>
+                    <option value="Kumuram Bheem Asifabad">Kumuram Bheem Asifabad</option>
+                    <option value="Mahabubabad">Mahabubabad</option>
+                    <option value="Mahabubnagar">Mahabubnagar</option>
+                    <option value="Mancherial">Mancherial</option>
+                    <option value="Medak">Medak</option>
+                    <option value="Medchal-Malkajgiri">Medchal-Malkajgiri</option>
+                    <option value="Mulugu">Mulugu</option>
+                    <option value="Nagarkurnool">Nagarkurnool</option>
+                    <option value="Nalgonda">Nalgonda</option>
+                    <option value="Narayanpet">Narayanpet</option>
+                    <option value="Nirmal">Nirmal</option>
+                    <option value="Nizamabad">Nizamabad</option>
+                    <option value="Peddapalli">Peddapalli</option>
+                    <option value="Rajanna Sircilla">Rajanna Sircilla</option>
+                    <option value="Ranga Reddy">Ranga Reddy</option>
+                    <option value="Sangareddy">Sangareddy</option>
+                    <option value="Siddipet">Siddipet</option>
+                    <option value="Suryapet">Suryapet</option>
+                    <option value="Vikarabad">Vikarabad</option>
+                    <option value="Wanaparthy">Wanaparthy</option>
+                    <option value="Warangal">Warangal</option>
+                    <option value="Yadadri Bhuvanagiri">Yadadri Bhuvanagiri</option>
+                </select>
+                <div id="districtInfo" class="info-box" style="display:none;"></div>
+            </div>
+            
+            <!-- Crop Selection with dynamic info -->
+            <div class="form-group">
+                <label>🌾 Crop *</label>
+                <select name="crop" id="crop" required onchange="showCropInfo()">
+                    <option value="">-- Select Crop --</option>
+                    <option value="rice">🌾 Rice</option>
+                    <option value="cotton">🌿 Cotton</option>
+                    <option value="maize">🌽 Maize</option>
+                    <option value="soybean">🫘 Soybean</option>
+                    <option value="vegetables">🥬 Vegetables</option>
+                    <option value="chillies">🌶️ Chillies</option>
+                    <option value="sugarcane">🎋 Sugarcane</option>
+                </select>
+                <div id="cropInfo" class="info-box" style="display:none;"></div>
+            </div>
+            
+            <!-- Rainfall with threshold warnings -->
+            <div class="form-group">
+                <label>☔ Rainfall (mm/24h) *</label>
+                <input type="number" name="rainfall" id="rainfall" step="0.1" min="0" max="500" value="150" required oninput="checkRainfall()">
+                <div class="threshold-hint">
+                    <span>Heavy:</span> >64.5 | <span>Very Heavy:</span> >115.5 | 
+                    <span>Extreme:</span> >204.4 | <span>Cloudburst:</span> >300
+                </div>
+                <div id="rainfallWarning" class="warning"></div>
+            </div>
+            
+            <!-- Flood Duration -->
+            <div class="form-group">
+                <label>⏱️ Flood Duration (days) *</label>
+                <input type="number" name="duration" step="0.5" min="0" max="30" value="2" required>
+                <div class="threshold-hint">Rice:4d | Cotton:2d | Maize:3d | Sugarcane:5d | Veg:1d</div>
+            </div>
+            
+            <!-- Temperature Rise -->
+            <div class="form-group">
+                <label>🌡️ Temperature Rise (°C) *</label>
+                <input type="number" name="temp" step="0.1" min="0" max="5" value="0.5" required>
+            </div>
+            
+            <!-- Area -->
+            <div class="form-group">
+                <label>📏 Area (hectares) *</label>
+                <input type="number" name="area" step="0.1" min="0.1" value="1" required>
+            </div>
+            
+            <!-- Soil Compatibility (dynamic) -->
+            <div id="compatibilityInfo" class="info-box" style="display:none;"></div>
+            
+            <button type="submit">🔮 Predict Complete Impact (7 Modules)</button>
+        </form>
+        
+        <div class="info-box">
+            <strong>📊 Model Features (50+):</strong><br>
+            Rainfall, Duration, Temperature, Soil Moisture, Elevation, River Distance, 
+            Humidity, Wind Speed, Water Level, Inundation Depth, Groundwater, 
+            Population Density, Soil Type, Crop Stage, District Vulnerability, and 35+ more
+        </div>
+        
+        <div class="footer">
+            Batch 12 | CSE-Data Science | 7 Prediction Modules
+        </div>
+    </div>
+    
+    <script>
+        // District database with all properties
+        const districtData = {
+            "Khammam": {risk: "Extreme", elevation: 95, soil: ["Clay Loam", "Red Loamy"], population: 340},
+            "Nalgonda": {risk: "High", elevation: 85, soil: ["Black Cotton", "Red Loamy"], population: 280},
+            "Warangal": {risk: "High", elevation: 118, soil: ["Red Loamy", "Black Cotton"], population: 385},
+            "Karimnagar": {risk: "Medium", elevation: 110, soil: ["Alluvial", "Red Loamy"], population: 365},
+            "Nizamabad": {risk: "Medium", elevation: 105, soil: ["Black Soil", "Alluvial"], population: 315},
+            "Adilabad": {risk: "Low", elevation: 150, soil: ["Red Soil", "Black Soil"], population: 245},
+            "Mahabubnagar": {risk: "Low", elevation: 115, soil: ["Red Sandy", "Black Soil"], population: 235},
+            "Ranga Reddy": {risk: "Medium", elevation: 158, soil: ["Lateritic", "Red Sandy"], population: 450},
+            "Medak": {risk: "Low", elevation: 140, soil: ["Red Loamy", "Black Soil"], population: 255},
+            "Hyderabad": {risk: "Medium", elevation: 158, soil: ["Lateritic", "Red Sandy"], population: 1850}
+        };
+        
+        // Crop database with all properties
+        const cropData = {
+            "rice": {name: "Rice", tolerance: 4, value: 65000, optimal_temp: 28, soil: ["Clay Loam", "Black Cotton", "Alluvial"]},
+            "cotton": {name: "Cotton", tolerance: 2, value: 85000, optimal_temp: 30, soil: ["Black Cotton", "Red Loamy", "Alluvial"]},
+            "maize": {name: "Maize", tolerance: 3, value: 45000, optimal_temp: 32, soil: ["Red Loamy", "Alluvial", "Red Soil"]},
+            "soybean": {name: "Soybean", tolerance: 2, value: 38000, optimal_temp: 28, soil: ["Red Soil", "Black Soil", "Alluvial"]},
+            "vegetables": {name: "Vegetables", tolerance: 1, value: 95000, optimal_temp: 25, soil: ["Lateritic", "Red Sandy", "Alluvial"]},
+            "chillies": {name: "Chillies", tolerance: 1, value: 120000, optimal_temp: 28, soil: ["Red Loamy", "Black Soil"]},
+            "sugarcane": {name: "Sugarcane", tolerance: 5, value: 145000, optimal_temp: 26, soil: ["Alluvial", "Black Soil", "Clay Loam"]}
+        };
+        
+        function showDistrictInfo() {
+            const district = document.getElementById('district').value;
+            const infoDiv = document.getElementById('districtInfo');
+            
+            if (district && districtData[district]) {
+                const data = districtData[district];
+                infoDiv.style.display = 'block';
+                infoDiv.innerHTML = `
+                    <strong>📍 ${district} District</strong><br>
+                    Risk Level: ${data.risk}<br>
+                    Elevation: ${data.elevation}m<br>
+                    Soil Types: ${data.soil.join(', ')}<br>
+                    Population Density: ${data.population}/km²
+                `;
+            } else {
+                infoDiv.style.display = 'none';
+            }
+            checkCompatibility();
+        }
+        
+        function showCropInfo() {
+            const crop = document.getElementById('crop').value;
+            const infoDiv = document.getElementById('cropInfo');
+            
+            if (crop && cropData[crop]) {
+                const data = cropData[crop];
+                infoDiv.style.display = 'block';
+                infoDiv.innerHTML = `
+                    <strong>🌾 ${data.name}</strong><br>
+                    Flood Tolerance: ${data.tolerance} days<br>
+                    Optimal Temperature: ${data.optimal_temp}°C<br>
+                    Value per Hectare: ₹${data.value}<br>
+                    Preferred Soil: ${data.soil.join(', ')}
+                `;
+            } else {
+                infoDiv.style.display = 'none';
+            }
+            checkCompatibility();
+        }
+        
+        function checkCompatibility() {
+            const district = document.getElementById('district').value;
+            const crop = document.getElementById('crop').value;
+            const compatDiv = document.getElementById('compatibilityInfo');
+            
+            if (district && crop && districtData[district] && cropData[crop]) {
+                const districtSoils = districtData[district].soil;
+                const cropSoils = cropData[crop].soil;
+                
+                const compatible = districtSoils.some(soil => cropSoils.includes(soil));
+                
+                compatDiv.style.display = 'block';
+                if (compatible) {
+                    compatDiv.innerHTML = '<span style="color: #28a745;">✅ This crop is well-suited for the soil in this district</span>';
+                    compatDiv.style.background = '#d4edda';
+                } else {
+                    compatDiv.innerHTML = '<span style="color: #dc3545;">⚠️ Warning: This crop may not perform well in this district\'s soil</span>';
+                    compatDiv.style.background = '#fff3cd';
+                }
+            } else {
+                compatDiv.style.display = 'none';
+            }
+        }
+        
+        function checkRainfall() {
+            const rainfall = parseFloat(document.getElementById('rainfall').value);
+            const warningDiv = document.getElementById('rainfallWarning');
+            
+            if (rainfall > 300) {
+                warningDiv.innerHTML = '⚠️ CLOUDBURST - Extreme danger! Immediate evacuation needed.';
+            } else if (rainfall > 204.4) {
+                warningDiv.innerHTML = '⚠️ EXTREME RAINFALL - Catastrophic flooding expected.';
+            } else if (rainfall > 115.5) {
+                warningDiv.innerHTML = '⚠️ VERY HEAVY RAIN - Severe flooding likely.';
+            } else if (rainfall > 64.5) {
+                warningDiv.innerHTML = '⚠️ HEAVY RAIN - Flood risk, monitor water levels.';
+            } else {
+                warningDiv.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>

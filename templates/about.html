@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Team - Flood Impact System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #8B1E3F;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header {
+            background: linear-gradient(135deg, #8B1E3F, #4A2C3D);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin: -25px -25px 25px -25px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .nav {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav a {
+            color: #8B1E3F;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            transition: all 0.3s;
+        }
+        .nav a:hover {
+            background: #8B1E3F;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        .project-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .project-title h2 {
+            color: #8B1E3F;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .project-title .batch {
+            background: #4A2C3D;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #f5f5f5, #e9ecef);
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            border-bottom: 4px solid #8B1E3F;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #8B1E3F;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #4A2C3D;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+        }
+        .section-title h2 {
+            color: #8B1E3F;
+            font-size: 2em;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #FFC857;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .team-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139,30,63,0.2);
+            border-color: #8B1E3F;
+        }
+        .avatar {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #8B1E3F, #4A2C3D);
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            color: white;
+        }
+        .name {
+            font-weight: bold;
+            color: #8B1E3F;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        .roll {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+        .contribution {
+            color: #4A2C3D;
+            font-size: 0.95em;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .supervisor-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+            border-left: 5px solid #FFC857;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .supervisor-icon {
+            font-size: 2em;
+            font-weight: bold;
+            color: #8B1E3F;
+            margin-bottom: 10px;
+        }
+        .supervisor-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #8B1E3F;
+            margin-bottom: 5px;
+        }
+        .supervisor-title {
+            color: #4A2C3D;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .detail-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #8B1E3F;
+        }
+        .detail-card h3 {
+            color: #8B1E3F;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .detail-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .detail-card li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .detail-card li:last-child {
+            border-bottom: none;
+        }
+        .detail-card strong {
+            color: #4A2C3D;
+        }
+        
+        .feature-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .feature-pill {
+            background: #8B1E3F;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+        .feature-pill-light {
+            background: #4A2C3D;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+        
+        .module-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .module-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FFC857;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .module-item strong {
+            color: #8B1E3F;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        .module-item small {
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #8B1E3F;
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            border: 2px solid #8B1E3F;
+        }
+        .btn:hover {
+            background: white;
+            color: #8B1E3F;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139,30,63,0.3);
+        }
+        .btn-secondary {
+            background: #4A2C3D;
+            border-color: #4A2C3D;
+        }
+        .btn-secondary:hover {
+            background: white;
+            color: #4A2C3D;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>TELANGANA FLOOD IMPACT SYSTEM</h1>
+            <p>Flood Impact Prediction using Machine Learning</p>
+        </div>
+        
+        <div class="nav">
+            <a href="/about">Home</a>
+            <a href="/predict">Predict</a>
+            <a href="/data">Dataset</a>
+            <a href="/analytics">Analytics</a>
+            <a href="/scenario">Scenario</a>
+        </div>
+        
+        <!-- Project Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.records }}</div>
+                <div class="stat-label">Dataset Records</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.districts }}</div>
+                <div class="stat-label">Telangana Districts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.crops }}</div>
+                <div class="stat-label">Major Crops</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.features }}</div>
+                <div class="stat-label">ML Features</div>
+            </div>
+        </div>
+        
+        
+        <!-- Project Details -->
+        <div class="section-title">
+            <h2>Project Details</h2>
+        </div>
+        
+        <div class="details-grid">
+            <div class="detail-card">
+                <h3>Objective</h3>
+                <p style="line-height: 1.6;">To predict flood impacts on agriculture, infrastructure, and economy in Telangana using Machine Learning models trained on historical data (2025-2026).</p>
+            </div>
+            
+            <div class="detail-card">
+                <h3>Dataset Overview</h3>
+                <ul>
+                    <li><strong>Time Period:</strong> 2025-2026</li>
+                    <li><strong>Total Records:</strong> {{ stats.records }} flood events</li>
+                    <li><strong>Districts Covered:</strong> All 33 districts</li>
+                    <li><strong>Crops Included:</strong> Rice, Cotton, Maize, Soybean, Vegetables, Chillies, Sugarcane</li>
+                    <li><strong>Features:</strong> 17 parameters including rainfall, soil, infrastructure, demographic data</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Features -->
+        <div style="margin: 30px 0;">
+            <h3 style="color: #8B1E3F; margin-bottom: 15px;">Key Features</h3>
+            <div class="feature-pills">
+                <span class="feature-pill">33 Districts</span>
+                <span class="feature-pill">7 Crops</span>
+                <span class="feature-pill">17 Features</span>
+                <span class="feature-pill-light">IMD Thresholds</span>
+                <span class="feature-pill-light">Soil Analysis</span>
+                <span class="feature-pill-light">Crop Suitability</span>
+                <span class="feature-pill">Economic Impact</span>
+                <span class="feature-pill">Humanitarian</span>
+                <span class="feature-pill">Market Analysis</span>
+            </div>
+        </div>
+        
+        <!-- 7 Modules -->
+        <div style="margin: 30px 0;">
+            <h3 style="color: #8B1E3F; margin-bottom: 15px;">7 Prediction Modules</h3>
+            <div class="module-list">
+                <div class="module-item">
+                    <strong>Module 1: Flood Hazard</strong>
+                    <small>IMD-based rainfall threshold analysis</small>
+                </div>
+                <div class="module-item">
+                    <strong>Module 2: Crop Suitability</strong>
+                    <small>Soil and climate compatibility</small>
+                </div>
+                <div class="module-item">
+                    <strong>Module 3: Crop Damage</strong>
+                    <small>ML prediction with 17 features</small>
+                </div>
+                <div class="module-item">
+                    <strong>Module 4: Economic Loss</strong>
+                    <small>Financial impact assessment</small>
+                </div>
+                <div class="module-item">
+                    <strong>Module 5: Market Impact</strong>
+                    <small>Price and supply forecasts</small>
+                </div>
+                <div class="module-item">
+                    <strong>Module 6: Humanitarian</strong>
+                    <small>Population and livestock affected</small>
+                </div>
+                <div class="module-item">
+                    <strong>Module 7: Recommendations</strong>
+                    <small>Actionable insights for farmers</small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Technology Stack -->
+        <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin: 30px 0;">
+            <h3 style="color: #8B1E3F; margin-bottom: 15px;">Technology Stack</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                <span style="background: white; padding: 8px 20px; border-radius: 25px;">Python</span>
+                <span style="background: white; padding: 8px 20px; border-radius: 25px;">Flask</span>
+                <span style="background: white; padding: 8px 20px; border-radius: 25px;">Scikit-learn</span>
+                <span style="background: white; padding: 8px 20px; border-radius: 25px;">Pandas</span>
+                <span style="background: white; padding: 8px 20px; border-radius: 25px;">NumPy</span>
+                <span style="background: white; padding: 8px 20px; border-radius: 25px;">HTML/CSS</span>
+                <span style="background: white; padding: 8px 20px; border-radius: 25px;">Random Forest</span>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div style="text-align: center; margin: 40px 0 20px;">
+            <a href="/predict" class="btn">Try Prediction System</a>
+            <a href="/scenario" class="btn">Try Scenario System</a>
+            <a href="/data" class="btn btn-secondary">Explore Dataset</a>
+        </div>
+        
+        <div class="footer">
+            <p>© {{ year }} Department of Computer Science & Engineering - Data Science</p>
+        </div>
+    </div>
+</body>
+</html>

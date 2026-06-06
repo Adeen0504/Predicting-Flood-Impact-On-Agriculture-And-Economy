@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flood Dataset - Telangana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #8B1E3F;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+        .header {
+            background: #8B1E3F;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            margin: -20px -20px 20px -20px;
+        }
+        .nav {
+            background: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .nav a {
+            color: #8B1E3F;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            border-left: 4px solid #8B1E3F;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #8B1E3F;
+        }
+        .feature-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        .feature-pill {
+            background: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid #8B1E3F;
+            color: #8B1E3F;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        th {
+            background: #8B1E3F;
+            color: white;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .btn {
+            display: inline-block;
+            background: #8B1E3F;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>📊 Enhanced Flood Dataset</h2>
+            <p>{{ stats.records }} Records | {{ stats.features }} Features | 33 Districts</p>
+        </div>
+        
+        <div class="nav">
+            <a href="/about">🏠 Home</a>
+            <a href="/predict">🔮 Predict</a>
+            <a href="/data">📊 Data</a>
+            <a href="/analytics">📈 Analytics</a>
+        </div>
+        
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.records }}</div>
+                <div>Records</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.features }}</div>
+                <div>Features</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.districts }}</div>
+                <div>Districts</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.crops }}</div>
+                <div>Crops</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.max_rain }}mm</div>
+                <div>Max Rain</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ stats.total_damage }}</div>
+                <div>Total Damage</div>
+            </div>
+        </div>
+        
+        <!-- All 67 Features List -->
+        <div class="feature-pills">
+            {% for col in columns %}
+                <span class="feature-pill">{{ col }}</span>
+            {% endfor %}
+            <span class="feature-pill" style="background: #8B1E3F; color: white;">
+                    Total: {{ columns|length }} Features
+            </span>
+        </div>
+        
+        <!-- Data Table (showing key columns) -->
+        <h3>📋 Sample Data (First 20 Records)</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>District</th>
+                        <th>Rainfall</th>
+                        <th>Duration</th>
+                        <th>Temp Rise</th>
+                        <th>Crop</th>
+                        <th>Stage</th>
+                        <th>Loss %</th>
+                        <th>Damage (Cr)</th>
+                        <th>Soil</th>
+                        <th>Population</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td>{{ row.year }}</td>
+                        <td>{{ row.district }}</td>
+                        <td>{{ row.rainfall_mm_24h }}mm</td>
+                        <td>{{ row.flood_duration_days }}d</td>
+                        <td>{{ row.temp_rise_c }}°C</td>
+                        <td>{{ row.crop_name }}</td>
+                        <td>{{ row.crop_stage }}</td>
+                        <td>{{ row.crop_loss_percent }}%</td>
+                        <td>₹{{ row.damage_crore }}</td>
+                        <td>{{ row.soil_type }}</td>
+                        <td>{{ row.population_affected }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="/predict" class="btn">🔮 Make Prediction</a>
+            <a href="/analytics" class="btn" style="background: #4A2C3D;">📈 View Analytics</a>
+        </div>
+        
+        <div class="footer">
+            Complete dataset with all 50+ features for ML model training
+        </div>
+    </div>
+</body>
+</html>

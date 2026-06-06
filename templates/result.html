@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #8B1E3F;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .header {
+            background: #8B1E3F;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            margin: -20px -20px 20px -20px;
+        }
+        .nav {
+            background: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            color: #8B1E3F;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .summary-item {
+            background: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .summary-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #8B1E3F;
+        }
+        .module {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #8B1E3F;
+            border-radius: 5px;
+        }
+        .module h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .hazard-critical { color: #dc3545; font-weight: bold; }
+        .hazard-high { color: #fd7e14; font-weight: bold; }
+        .hazard-medium { color: #ffc107; font-weight: bold; }
+        .hazard-low { color: #28a745; font-weight: bold; }
+        
+        .damage-box {
+            background: #e8f4f8;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .damage-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #8B1E3F;
+        }
+        .loss-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .badge-good {
+            background: #d4edda;
+            color: #155724;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .badge-poor {
+            background: #fff3cd;
+            color: #856404;
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .rec-list {
+            list-style: none;
+            padding: 0;
+        }
+        .rec-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid #8B1E3F;
+        }
+        .btn {
+            display: inline-block;
+            background: #8B1E3F;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .btn-secondary {
+            background: #4A2C3D;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        @media (max-width: 600px) {
+            .summary-grid, .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>📊 Complete Prediction Results</h2>
+            <small>{{ timestamp }}</small>
+        </div>
+        
+        <div class="nav">
+            <a href="/about">🏠 Home</a>
+            <a href="/predict">🔄 New Prediction</a>
+            <a href="/data">📊 Data</a>
+            <a href="/analytics">📈 Analytics</a>
+        </div>
+        
+        {% if error %}
+        <div style="background: #ffebee; padding: 20px; color: #c62828; border-radius: 5px;">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% else %}
+        
+        <!-- Quick Summary -->
+        <div class="summary-grid">
+            <div class="summary-item">
+                <div>📍 District</div>
+                <div class="summary-value">{{ district }}</div>
+                <small>{{ district_risk }} Risk</small>
+            </div>
+            <div class="summary-item">
+                <div>🌾 Crop</div>
+                <div class="summary-value">{{ crop_icon }} {{ crop }}</div>
+                <small>{{ area }} ha</small>
+            </div>
+            <div class="summary-item">
+                <div>☔ Rainfall</div>
+                <div class="summary-value">{{ rainfall }} mm</div>
+                <small>{{ duration }} days</small>
+            </div>
+            <div class="summary-item">
+                <div>📊 Damage</div>
+                <div class="summary-value">{{ damage }}%</div>
+                <small>Confidence: {{ ml_confidence }}%</small>
+            </div>
+        </div>
+        
+        <!-- MODULE 1: Flood Hazard -->
+        <div class="module">
+            <h3>⚠️ MODULE 1: Flood Hazard Assessment</h3>
+            <div class="{{ hazard_class }}">{{ hazard }}</div>
+            <p>{{ hazard_desc }}</p>
+            <div class="info-row"><span>Rainfall:</span> <strong>{{ rainfall }} mm/day</strong></div>
+            <div class="info-row"><span>Duration:</span> <strong>{{ duration }} days</strong></div>
+            <div class="info-row"><span>Temperature Rise:</span> <strong>{{ temp }}°C</strong></div>
+            <div class="info-row"><span>Elevation:</span> <strong>{{ district_elevation }}m</strong></div>
+        </div>
+        
+        <!-- MODULE 2: Crop Suitability -->
+        <div class="module">
+            <h3>🌱 MODULE 2: Crop Suitability Analysis</h3>
+            {% if soil_match %}
+            <div class="badge-good">✅ {{ suitability_msg }}</div>
+            {% else %}
+            <div class="badge-poor">⚠️ {{ suitability_msg }}</div>
+            {% endif %}
+            <div class="info-row"><span>Suitability Score:</span> <strong>{{ suitability }}</strong></div>
+        </div>
+        
+        <!-- MODULE 3: Crop Damage -->
+        <div class="module">
+            <h3>🌾 MODULE 3: Crop Damage Prediction</h3>
+            <div class="damage-box">
+                <div>Expected Yield Loss</div>
+                <div class="damage-value">{{ damage }}%</div>
+            </div>
+            <div class="grid-2">
+                <div class="info-row"><span>ML Confidence:</span> <strong>{{ ml_confidence }}%</strong></div>
+                <div class="info-row"><span>Similar Events:</span> <strong>{{ similar_events }}</strong></div>
+            </div>
+        </div>
+        
+        <!-- MODULE 4: Economic Loss -->
+        <div class="module">
+            <h3>💰 MODULE 4: Economic Loss Assessment</h3>
+            <div class="damage-box">
+                <div>Total Estimated Loss</div>
+                <div class="loss-value">{{ loss }}</div>
+            </div>
+            <div class="grid-2">
+                <div class="info-row"><span>Loss per Hectare:</span> <strong>₹{{ loss_per_ha }}</strong></div>
+                <div class="info-row"><span>In Crores:</span> <strong>₹{{ loss_in_cr }} Cr</strong></div>
+                <div class="info-row"><span>Infrastructure Damage:</span> <strong>₹{{ infra_damage }} Cr</strong></div>
+            </div>
+        </div>
+        
+        <!-- MODULE 5: Market Impact -->
+        <div class="module">
+            <h3>📈 MODULE 5: Market Impact Forecast</h3>
+            <div style="background: #e8f4f8; padding: 10px; text-align: center; border-radius: 5px; margin-bottom: 10px;">
+                <strong>{{ market }}</strong>
+            </div>
+            <div class="grid-2">
+                <div class="info-row"><span>Price Increase:</span> <strong>{{ price_increase }}</strong></div>
+                <div class="info-row"><span>Supply Shortage:</span> <strong>{{ shortage_days }} days</strong></div>
+            </div>
+        </div>
+        
+        <!-- MODULE 6: Humanitarian Impact -->
+        <div class="module">
+            <h3>👥 MODULE 6: Humanitarian Impact</h3>
+            <div class="grid-2">
+                <div class="info-row"><span>Population Affected:</span> <strong>{{ affected_population }}</strong></div>
+                <div class="info-row"><span>Farmers Affected:</span> <strong>{{ farmers_affected }}</strong></div>
+                <div class="info-row"><span>Houses at Risk:</span> <strong>{{ houses_at_risk }}</strong></div>
+                <div class="info-row"><span>Livestock at Risk:</span> <strong>{{ livestock_at_risk }}</strong></div>
+            </div>
+        </div>
+        
+        <!-- MODULE 7: Recommendations -->
+        <div class="module">
+            <h3>📋 MODULE 7: Actionable Recommendations</h3>
+            <ul class="rec-list">
+                {% for rec in recommendations %}
+                <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="/predict" class="btn">🔄 New Prediction</a>
+            <a href="/analytics/{{ district }}/{{ crop }}/{{ rainfall }}/{{ duration }}/{{ temp }}/{{ area }}" class="btn btn-secondary">
+                <i class="fas fa-chart-bar"></i> View Analytics
+            </a>
+        </div>
+        
+        {% endif %}
+        
+        <div class="footer">
+            Batch 12 | CSE-Data Science | 7 Modules | 50+ Features
+        </div>
+    </div>
+</body>
+</html>
