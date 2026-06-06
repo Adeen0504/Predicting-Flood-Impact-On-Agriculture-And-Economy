@@ -39,12 +39,9 @@ telangana-flood-prediction/
 ├── static/
 │   └── images/
 │       ├── screenshots/
-│       │   ├── prediction-form.png
-│       │   ├── results-page.png
-│       │   └── analytics-dashboard.png
+│       │   
 │       └── docs/
-│           ├── project-structure.png
-│           └── architecture.png
+│
 └── templates/
     ├── about.html                  # Project overview page
     ├── index.html                  # Prediction form
@@ -62,8 +59,8 @@ telangana-flood-prediction/
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/telangana-flood-prediction.git
-cd telangana-flood-prediction
+git clone https://github.com/YOUR_USERNAME/Predicting-Flood-Impact-On-Agriculture-And-Economy.git
+cd Predicting-Flood-Impact-On-Agriculture-And-Economy
 ```
 
 **2. Create a virtual environment**
